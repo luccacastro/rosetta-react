@@ -5,9 +5,9 @@ import NewsContainer from './NewsContainer'
 const Main = () => {
     return(
         <main className="main-container">
-            <FeedMenu/>
+            {/* <FeedMenu/> */}
             <NewsContainer/>
-            <HistoryMenu/>
+            {/* <HistoryMenu/> */}
         </main>
     )
 }
