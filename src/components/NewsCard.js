@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const NewsCard = ({item}) => {
     const checkLengthComment = (item) => {
         let res = item
@@ -12,12 +14,13 @@ const NewsCard = ({item}) => {
     }
 
     return(
-        <article className="news-card-container">
+        <Link className="news-card-container" to={`article/${item.article_id}`}>
+        {/* <article className="news-card-container"> */}
             <div className="news-card-upvote-section"></div>
             <div className="news-card-content">
                 <div className="news-card-header">
-                    <h5 className="news-card-topic-field">Topic: {item.topic}</h5>
-                    <h5 className="news-card-creation-date">{`Created at ${cleanDateTime(item.created_at)}`}</h5>
+                    <h5 className="news-card-topic-field skeleton-header">Topic: {item.topic}</h5>
+                    <h5 className="news-card-creation-date skeleton-header">{`Created at ${cleanDateTime(item.created_at)}`}</h5>
                 </div>
                 
                 <h3>{item.title}</h3>
@@ -26,8 +29,8 @@ const NewsCard = ({item}) => {
                     <h5>Comments {item.comment_count}</h5>
                 </div>
             </div>
-            
-        </article>
+        {/* </article> */}
+        </Link>
     )
 }
 

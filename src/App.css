@@ -9,6 +9,7 @@
 *{
   padding: 0; 
   margin: 0;
+  font-family: 'IBM Plex Sants' sans-serif;
   box-sizing: border-box;
 }
 
@@ -45,10 +46,16 @@
 }
 
 .filter-wrapper{
+  font-family: 'IBM Plex Sants' sans-serif;
   position: sticky;
+  display: flex;
+  flex-direction: row;
   top: 80px;
   height: 50px;
   width: 100%;
+  font-size: 18px;
+  align-items: center;
+  margin-top: 40px;
   /* margin: 10px; */
   /* margin-top: 20px; */
   background-color: white;
@@ -56,8 +63,29 @@
   border: 1px solid var(--border-color);
 }
 
+.filter-wrapper a {
+  font-family: 'IBM Plex Sans' sans-serif;
+  color: black;
+  margin-left: 13px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-decoration: none;
+  transition: 0.1s ease-in;
+}
+
+
+
+.filter-wrapper a:hover{
+  font-family: 'IBM Plex Sans' sans-serif;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+}
+
 .news-container{
-  width: 65vw;
+  width: 60vw;
   height: 100%;
   /* overflow: scroll; */
 }
@@ -70,6 +98,11 @@
   /* width: 100%; */
   /* padding-left: 20px;
   padding-right: 20px; */
+}
+
+.skeleton-format{
+  color: rgb(255,255,255, 0.2);
+  background-color: rgb(153 153 153 / 20%);
 }
 
 .icons-section{
@@ -132,7 +165,7 @@
   background-color: white;
   border: 1px solid var(--border-color);
   border-radius: 5px;
-  width: 80%;
+  width: 70%;
   margin-top: 10px;
   margin-bottom: 10px;
   min-width: 269px;
