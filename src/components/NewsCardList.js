@@ -15,15 +15,14 @@ const NewsCardList = ({topic}) => {
     console.log(currentTopic)
     useEffect(() => {
         setCurrentTopic(topic)
-        let url = 'https://nc-news-example-seminar-3-16.herokuapp.com/api/articles'
-        if(topic){
-            url = `https://nc-news-example-seminar-3-16.herokuapp.com/api/articles?topic=${topic}`
-        }
-        axios.get(url).then(res => {
-            setNewsData(newsData => res.data.articles)
-            console.log(newsData)
+        axios.get("https://nc-news-example-seminar-3-16.herokuapp.com/api/articles", {
+            params: {
+              topic: topic,
+            },
+          }).then(({data}) => {
+            setNewsData(newsData => data.articles)
             setIsLoading(false)
-        })
+          });
     },[location])
     
     if(isLoading) return (
