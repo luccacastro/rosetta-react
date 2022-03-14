@@ -14,7 +14,7 @@ const NewsCard = ({item}) => {
     }
 
     return(
-        <Link className="news-card-container" to={`article/${item.article_id}`}>
+        <Link className="news-card-container" to={`/article/${item.article_id}`}>
         {/* <article className="news-card-container"> */}
             <div className="news-card-upvote-section"></div>
             <div className="news-card-content">
@@ -23,7 +23,7 @@ const NewsCard = ({item}) => {
                     <h5 className="news-card-creation-date skeleton-header">{`Created at ${cleanDateTime(item.created_at)}`}</h5>
                 </div>
                 
-                <h3>{item.title}</h3>
+                <h3 className="article-title">{item.title}</h3>
                 <p>{checkLengthComment(item.body)}</p>
                 <div className="icons-section">
                     <h5>Comments {item.comment_count}</h5>
