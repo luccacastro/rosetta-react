@@ -7,6 +7,7 @@ import NewsCardList from "./NewsCardList"
 
 const TopicsPage = () => {
     const { topic } = useParams()
+    console.log(topic)
     return(
         <div>
              <main className="main-container">

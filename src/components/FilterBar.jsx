@@ -1,35 +1,53 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import {Link} from 'react-router-dom'
+import Select from 'react-select';
+import { useNavigate } from 'react-router-dom';
 
-const FilterBar = () => {
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
+const FilterBar = ({setCommentOrder, setVoteOrder}) => {
     const [topicsData, setTopicsData] = useState([])
-    const [selectedTopic, setSelectedTopic] = useState('')
+    const [currentTopic, setCurrentTopic] = useState('top')
+    // const [selecte, setSelectedTopic] = useState('')
+    const navigate = useNavigate();
+
+    const optionsList = [{label:"Top"},{label:"Lowest"}]
 
     useEffect(() => {
         console.log('hello')
-        axios.get('https://nc-news-example-seminar-3-16.herokuapp.com/api/topics')
+        axios.get('http://localhost:5502/api/subpage/')
             .then(({data}) => {
-                console.log(data)
-                setTopicsData(data.topics)
-                console.log(topicsData)
+
+                const labels = data.sublist.map(x =>{ return {label: x.title}})
+                // console.log(data)
+                setTopicsData(topicsData => labels)
+                
             })
     }, [])
+    console.log(currentTopic)
 
     const handleSelectedTopic = (topic) => {
-        setSelectedTopic(topic)
+        console.log(topic)
+        // setCurrentTopic(topic.label)
+        navigate(`/topic/${topic.label}`)
+    }
+
+    const handleVotesOrder = (orderType) => {
+        setVoteOrder(orderType)
+    }
+
+    const handleCommentsOrder = (orderType) =>{
+        setCommentOrder(orderType)
     }
 
     return(
         <main className="filter-wrapper">
-                {topicsData.map((item) => {
-                    return (
-                        <Link to={`/topic/${item.slug}`}>
-                            <h3 onClick={() => handleSelectedTopic(item.slug)}>{item.slug}</h3>
-                        </Link>
-                        )
-                    }
-                )}
+            <h3>Subpage </h3>
+            {topicsData.length?  <Select className="select-component" options={topicsData} onChange={handleSelectedTopic} value={currentTopic} />: null}
+            <h3>Votes </h3>
+            <Select className="" options={optionsList} onChange={handleVotesOrder} value='Top'/>
+            <h3>Comments </h3>
+            <Select className="" options={optionsList} onChange={handleCommentsOrder} name='dsdas'/>
         </main>
     )
 }

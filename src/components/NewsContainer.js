@@ -6,13 +6,14 @@ import {useState, createContext, useContext} from 'react'
 // const NewsDataTopicContext = createContext();
 
 const NewsContainer = () => {
-    // const [newsDataTopic, setNewsData] = useState(null);
+    const [commentOrder, setCommentOrder] = useState()
+    const [voteOrder, setVoteOrder] = useState()
     
     return(
        <div className="news-container">
-                <FilterBar></FilterBar>
-                <CreatePost/>
-                <NewsCardList topic={null}/>
+                <FilterBar setCommentOrder={setCommentOrder} setVoteOrder={setVoteOrder} ></FilterBar>
+                {/* <CreatePost/> */}
+                <NewsCardList commentOrder={commentOrder} voteOrder={voteOrder} topic={null}/>
         </div>
     )
 }

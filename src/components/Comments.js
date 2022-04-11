@@ -1,18 +1,29 @@
-import VoteIcon from '../vote_icon.png'
-import ColoredVoteIcon from '../colored_vote_icon.png'
 import axios from "axios"
 import Trix from "trix";
+import Votes from "./Votes.js";
 import { ReactTrixRTEInput, ReactTrixRTEToolbar } from "react-trix-rte";
 
+import {EditorState} from 'draft-js';
+import {stylizeText} from './utils/utils.js'
 import { useEffect, useState, useRef } from 'react'
-import useWindowSize from './hooks/useWindowSize'
+import useWindowSize from './hooks/useWindowSize';
+import CommentBox from "./CommentBox.js";
+// import { Editor } from "react-draft-wysiwyg";
 
-const Comments = ({ body, user, children, depth, votes, url}) => {
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
+
+const Comments = (item, setUpdateCommentTree) => {
+    // console.log(item)
     const [userData, setUserData] = useState()
     const [showChildren, setShowChildren] = useState(true)
     const [showCommentEditor, setShowCommentEditor] = useState(false)
     const [commentText, setCommentText] = useState('false')
     const [isLoaded, setIsLoaded] = useState(false)
+    const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty(),
+    );
+
     let size = useWindowSize()
     
     const commentRef = useRef(null);
@@ -32,7 +43,7 @@ const Comments = ({ body, user, children, depth, votes, url}) => {
         setShowCommentEditor(currState => !currState)
     }
 
-    console.log(commentRef.current?.clientHeight)
+    // console.log(commentRef.current?.clientHeight)
 
     useEffect(() =>{
         let commentHeight = commentRef.current?.offsetHeight
@@ -42,17 +53,17 @@ const Comments = ({ body, user, children, depth, votes, url}) => {
                                         sideProfileHeight: sideProfileHeight, 
                                         profilePicHeight: profilePicHeight}})
 
-        const url = `http://localhost:5502/api/username/${user}`
-        console.log(url)
+        const url = `http://localhost:5502/api/username/${item.author}`
+        // console.log(url)
         axios.get(url).then(({data}) =>{
-            console.log(data.userdata)
+            // console.log(data.userdata)
             setUserData(data.userdata)
             setIsLoaded(true)
-            // setIsLoaded(true)
         }).catch(err => console.log(err))
     },[])
 
     useEffect(() =>{
+        // console.log("SIZE CHANGED")
         let commentHeight = commentRef.current?.offsetHeight
         let sideProfileHeight = sideProfileRef.current?.offsetHeight
         let profilePicHeight = profilePicRef.current?.offsetHeight
@@ -60,69 +71,42 @@ const Comments = ({ body, user, children, depth, votes, url}) => {
                                         sideProfileHeight: sideProfileHeight, 
                                         profilePicHeight: profilePicHeight}})
     }, [size, showCommentEditor, showChildren])
-    console.log(elementSizes)
 
-    // console.log(userData)
-
-    const stylizeText = (comment) => {
-        // const linkArr= []
-        const getLinks = comment.match(/\[(.*?)\]+\((.*)\)/g)
-        if(getLinks){
-            getLinks.forEach(element => {
-                let text = element.match(/\[(.*?)\]/g)
-                let url = element.match(/\((.*)\)/g)
-                url = url[0].slice(1, url.length-2)
-                text = text[0].slice(1, text.length-2)
-                const aTag = `<a href=${url}>${text}</a>`
-                comment = comment.replace(element, aTag)
-            });
-            console.log(comment)
-        }
-       
-        return `<h3>${comment}</h3>`
-    }
-
-    const handleChange = (e, newValue) =>{
-        setCommentText(newValue)
-    }
-    console.log(commentText)
+    // console.log(commentText)
     
     return(
         <div ref={commentRef} class="comment">
             <div >
-                <div className='comment-wrapper'  style={{marginLeft: `${depth*40}px`}}>
+                <div className='comment-wrapper'  style={{marginLeft: `${(item.depth-1)*25}px`}}>
                     <div ref={sideProfileRef} className='side-profile-wrapper'> 
                         {isLoaded? <img ref={profilePicRef} className="comment-profile-pic" src={userData.avatar_url}></img> : null}
-                        <div onClick={toggleChildVisibility} className={`stroke ${depth}`} style={{ height: `${(elementSizes.commentHeight+5*depth - 70 ) }px`, 
+                        <div onClick={toggleChildVisibility} className={`stroke ${item.depth}`} style={{ height: `${(elementSizes.commentHeight+5*item.depth - 70 ) }px`, 
                                                                     top: `${elementSizes.sideProfileHeight - (elementSizes.sideProfileHeight-30-10)}px`}}>
                         </div>
                     </div>
                     
                     <div className='comment-content'>
-                        <p className="comment-author"  >{user}</p>
-                        <h3 dangerouslySetInnerHTML={{ __html: stylizeText(body) }}></h3>
+                        <p className="comment-author"  >{item.author} {item.parent_comment_id} {item.ref_id}</p>
+                        <h3 dangerouslySetInnerHTML={{ __html: stylizeText(item.body_styled)  }}></h3>
                 
                         <div className="comment-options">
-                            <img src={VoteIcon} alt=""height="25" />
-                            <h3>{votes}</h3>
-                            <img src={VoteIcon} style={{transform: 'rotate(180deg)', marginLeft:"10px"}} alt="" height="25"/>
+                            <Votes contentType={"comment"} votes={item.votes} ref_id={item.ref_id}/>
                             <h3 onClick={toggleCommentEditor}>Reply</h3>
-                            <h3>Save</h3>
+                            {/* <h3>Save</h3>
                             <h3>Give Award</h3>
-                        <h3>Follow</h3>
+                        <h3>Follow</h3> */}
                         </div>
                     </div>
                 </div>
-                {showCommentEditor? 
-                    <div style={{marginLeft: `${(depth+1)*40}px`}}> 
-                        <ReactTrixRTEToolbar toolbarId="react-trix-rte-editor" />
-                        <ReactTrixRTEInput
-                            toolbarId="react-trix-rte-editor"
-                            defaultValue="<div>React Trix Rich Text Editor</div>"
-                            onChange={handleChange}
-                        />
-                    </div>: null}
-                {showChildren? children.map(item => <Comments body={item.body} user={item.author} children={item.childList} depth={item.depth} votes={item.votes} url={item.avatar_url}/>): null}
+                {showCommentEditor?<CommentBox depth={item.depth} 
+                                            parent_comment_id={item.ref_id} 
+                                            post_id={item.post_id} 
+                                            author={item.author} 
+                                            setUpdateCommentTree={setUpdateCommentTree}/>
+                                    : null}   
+                   
+                    {showChildren? item.childList.map((item, idx) => <Comments key={item.ref_id} {...item} setUpdateCommentTree={setUpdateCommentTree}/>): null}
+                    {/* depth={0} parent_comment_id={articleData.ref_id} post_id={articleData.ref_id} author={articleData.author} setUpdateCommentTree={setUpdateCommentTree} */}
             </div>
         </div>
     )
