@@ -8,16 +8,16 @@ import Votes from "./Votes.js"
 import CommentBox from "./CommentBox.js"
 
 const ArticlePage = () => {
-    const { article_id } = useParams()
+    const { post_id } = useParams()
     const [articleData, setArticleData] = useState({})
     const [updateCommentTree, setUpdateCommentTree] = useState(0)
     const [isLoaded, setIsLoaded] = useState(false)
     let location = useLocation()
-    console.log(location)
-    console.log(article_id)
+    // console.log(location)
+    // console.log(article_id)
     useEffect(()=>{
         console.log('hello')
-        const url = `http://localhost:5502/api/post/${article_id}`
+        const url = `http://localhost:5502/api/post/${post_id}`
         // console.log(url)
         axios.get(url).then(({data}) =>{
             // console.log(data)
