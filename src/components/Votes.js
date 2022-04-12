@@ -39,7 +39,7 @@ const Votes = ({contentType, votes, ref_id}) => {
             setCurrentVotes(votes + increaseAmount)
             setLastVote(voteType)
         }
-        axios.post('http://localhost:5502/api/voting/', {
+        axios.post('https://reddit-flask-api.herokuapp.com/api/voting/', {
                 contentType: contentType,
                 ref_id: ref_id,
                 increaseScore: !voteState[voteType]

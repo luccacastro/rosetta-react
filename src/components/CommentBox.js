@@ -27,7 +27,7 @@ const CommentBox = ({depth, parent_comment_id, post_id, author, setUpdateComment
 		}
         console.log(comment_obj)
         
-        axios.post(`http://localhost:5502/api/post/${post_id}/comments`, comment_obj).then((res) =>{
+        axios.post(`https://reddit-flask-api.herokuapp.com/api/post/${post_id}/comments`, comment_obj).then((res) =>{
             console.log('Comment saved', comment_obj.ref_id)
             setUpdateCommentTree(currState => currState + 1)
             setCommentText('')

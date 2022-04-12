@@ -17,7 +17,7 @@ const ArticlePage = () => {
     // console.log(article_id)
     useEffect(()=>{
         console.log('hello')
-        const url = `http://localhost:5502/api/post/${post_id}`
+        const url = `https://reddit-flask-api.herokuapp.com/api/post/${post_id}`
         // console.log(url)
         axios.get(url).then(({data}) =>{
             // console.log(data)
@@ -35,7 +35,7 @@ const ArticlePage = () => {
 
     const commentRender = (comment) =>{
         // console.log(comment)
-        let parentComments = comment.filter(item => item.parent_comment_id === article_id)
+        let parentComments = comment.filter(item => item.parent_comment_id === post_id)
         parentComments.forEach((item)=> {
             item.depth = 1
         })

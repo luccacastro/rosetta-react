@@ -53,7 +53,7 @@ const Comments = (item, setUpdateCommentTree) => {
                                         sideProfileHeight: sideProfileHeight, 
                                         profilePicHeight: profilePicHeight}})
 
-        const url = `http://localhost:5502/api/username/${item.author}`
+        const url = `https://reddit-flask-api.herokuapp.com/api/username/${item.author}`
         // console.log(url)
         axios.get(url).then(({data}) =>{
             // console.log(data.userdata)

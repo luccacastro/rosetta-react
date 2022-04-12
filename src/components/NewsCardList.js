@@ -21,7 +21,7 @@ const NewsCardList = ({topic, commentOrder, voteOrder}) => {
         // const paramValue = params.get("post");  
         // console.lo
         setCurrentTopic(topic)
-        axios.get("http://localhost:5502/api/post/sample", {
+        axios.get("https://reddit-flask-api.herokuapp.com/api/post/sample", {
             params: {
               topic: topic,
               votes: voteOrder,

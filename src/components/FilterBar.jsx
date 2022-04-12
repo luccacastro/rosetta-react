@@ -15,7 +15,7 @@ const FilterBar = ({setCommentOrder, setVoteOrder}) => {
 
     useEffect(() => {
         console.log('hello')
-        axios.get('http://localhost:5502/api/subpage/')
+        axios.get('https://reddit-flask-api.herokuapp.com/api/subpage/')
             .then(({data}) => {
 
                 const labels = data.sublist.map(x =>{ return {label: x.title}})
