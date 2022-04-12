@@ -1,7 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useLocation, useParams } from "react-router-dom"
-import {stylizeText, renderPostMedia} from './utils/utils.js'
+import { useLocation, useParams, useNavigate, Redirect } from "react-router-dom"
+import {stylizeText, renderPostMedia, cleanDateTime, sanitizeVotes} from './utils/utils.js'
+// import  { Redirect,  } from 'react-router-dom'
 import Comments from "./Comments"
 import ScrollToTop from "react-scroll-to-top";
 import Votes from "./Votes.js"
@@ -13,33 +14,24 @@ const ArticlePage = () => {
     const [updateCommentTree, setUpdateCommentTree] = useState(0)
     const [isLoaded, setIsLoaded] = useState(false)
     let location = useLocation()
-    // console.log(location)
-    // console.log(article_id)
+    const navigate = useNavigate();
     useEffect(()=>{
         console.log('hello')
         const url = `https://reddit-flask-api.herokuapp.com/api/post/${post_id}`
-        // console.log(url)
         axios.get(url).then(({data}) =>{
-            // console.log(data)
             setArticleData(data)
             setIsLoaded(true)
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            navigate('/article/no-topic-found')    
+        })
+        
     },[updateCommentTree])
 
-
-
-    const separateParagraph = (text) => {
-        console.log(text)
-        return text.split('.').filter(x => x).map(x => x + '.')
-    }
-
     const commentRender = (comment) =>{
-        // console.log(comment)
         let parentComments = comment.filter(item => item.parent_comment_id === post_id)
         parentComments.forEach((item)=> {
             item.depth = 1
         })
-        // parentComments.depth = 0
 
         const buildCommentTree = (item, depth) =>{
             depth = depth + 1
@@ -51,12 +43,10 @@ const ArticlePage = () => {
             childComments.forEach((item) => buildCommentTree(item, item.depth))
         }
         parentComments.forEach((item, idx) => {
-            // let depth = 0
             buildCommentTree(item, item.depth)
         });
 
         let commentComponentList = parentComments.map((item, idx) => <Comments key={item.ref_id} {...item} setUpdateCommentTree={setUpdateCommentTree}/>)
-        // parentComments.map((item, idx) => <Comments key={item.ref_id} body={item.body} body_styled={item.body_styled} user={item.author} children={item.childList} depth={item.depth} votes={item.votes} url={item.avatar_url} ref_id={item.ref_id}/>)
         return commentComponentList
     }
 
@@ -75,6 +65,14 @@ const ArticlePage = () => {
                             <Votes contentType={"post"} votes={articleData.votes} ref_id={articleData.ref_id}/>
                         </div>
                             <div className="content-wrapper">
+                            <div className="news-card-header">
+                                    <div className="topic-wrapper">
+                                        <div className="topic-prof-img"></div>
+                                        <h5 className="news-card-topic-field skeleton-header topic-name">s/{articleData.subpage_name}</h5>
+                                        </div> 
+                                        <h5 className="news-card-topic-field skeleton-header">Posted by {articleData.author}</h5>
+                                        <h5 className="news-card-creation-date skeleton-header">{`${cleanDateTime(articleData.created_at)}`}</h5>
+                                </div>
                                 <h3 className="article-title" >{articleData.title}</h3>
                                 <div className="article-body" dangerouslySetInnerHTML={{__html: stylizeText(articleData.body_styled)}}></div>
                                 <div className="post-media-wrapper">

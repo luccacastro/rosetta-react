@@ -36,4 +36,18 @@ const renderPostMedia = (mediaType, url) => {
     return mediaType === "video"? postVideo : postImage
 }   
 
-export {stylizeText, renderPostMedia}
+const cleanDateTime = (item) => {
+    var format = {
+        day: "numeric",
+        month: "2-digit",
+        year: "numeric"
+      };
+    let date = new Date(item).toLocaleString("en-gb", format)
+    return date
+}
+
+const sanitizeVotes = (votes) => {
+    return votes > 1000? `${(votes/1000).toFixed(2).slice(0,4)}k`: votes
+}
+
+export {stylizeText, renderPostMedia, cleanDateTime, sanitizeVotes}

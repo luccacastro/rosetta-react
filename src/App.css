@@ -245,8 +245,8 @@ ul, ol{
 .post-img{
   min-width: 200px;
   object-fit: fill;
-  max-height: 400px;
-  max-width: 400px;
+  max-height: 500px;
+  max-width: 500px;
   margin: auto;
   display: block;
   /* background-color: #000; */

@@ -15,7 +15,7 @@ const Votes = ({contentType, votes, ref_id}) => {
     // const { addToast } = useToasts()
 
     useEffect(() => {
-
+        
     }, [])
 
     const handleClick = (voteType) =>{

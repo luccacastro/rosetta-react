@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const FilterBar = ({setCommentOrder, setVoteOrder}) => {
     const [topicsData, setTopicsData] = useState([])
-    const [currentTopic, setCurrentTopic] = useState('top')
+    const [currentTopic, setCurrentTopic] = useState('')
     // const [selecte, setSelectedTopic] = useState('')
     const navigate = useNavigate();
 
@@ -43,11 +43,11 @@ const FilterBar = ({setCommentOrder, setVoteOrder}) => {
     return(
         <main className="filter-wrapper">
             <h3>Subpage </h3>
-            {topicsData.length?  <Select className="select-component" options={topicsData} onChange={handleSelectedTopic} value={currentTopic} />: null}
+            {topicsData.length?  <Select className="select-component" options={topicsData} onChange={handleSelectedTopic} selectedValue={currentTopic}/>: null}
             <h3>Votes </h3>
-            <Select className="" options={optionsList} onChange={handleVotesOrder} value='Top'/>
+            <Select className="" options={optionsList} onChange={handleVotesOrder} value='Top' isSearchable={false}/>
             <h3>Comments </h3>
-            <Select className="" options={optionsList} onChange={handleCommentsOrder} name='dsdas'/>
+            <Select className="" options={optionsList} onChange={handleCommentsOrder} name='dsdas' isSearchable={false}/>
         </main>
     )
 }

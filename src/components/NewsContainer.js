@@ -12,7 +12,6 @@ const NewsContainer = () => {
     return(
        <div className="news-container">
                 <FilterBar setCommentOrder={setCommentOrder} setVoteOrder={setVoteOrder} ></FilterBar>
-                {/* <CreatePost/> */}
                 <NewsCardList commentOrder={commentOrder} voteOrder={voteOrder} topic={null}/>
         </div>
     )

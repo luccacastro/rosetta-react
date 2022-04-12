@@ -31,7 +31,7 @@ const CommentBox = ({depth, parent_comment_id, post_id, author, setUpdateComment
             console.log('Comment saved', comment_obj.ref_id)
             setUpdateCommentTree(currState => currState + 1)
             setCommentText('')
-            // setToastMessage(1)
+            setToastMessage(counter => counter + 1)
             
             toast.success('🦄 Comment added sucessfully!', {
                 position: "bottom-center",
@@ -51,7 +51,7 @@ const CommentBox = ({depth, parent_comment_id, post_id, author, setUpdateComment
 
     return(
         <div className="comment-box-wrapper" style={{marginLeft: `${((depth)*25)+20}px`}}> 
-            {toastMessage == 1? <ToastContainer
+            {toastMessage > 1? <ToastContainer
                             position="top-right"
                             autoClose={5000}
                             hideProgressBar={false}
