@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+<div align="center">
+  <img src="https://www.freecodecamp.org/news/content/images/2021/06/Ekran-Resmi-2019-11-18-18.08.13.png" alt="ReactJS LOGO" width="800" />
+  <p></p>
+  <h1>NC News</h1>
+  <p></p>
+  <sup>
+    <a href="https://iridescent-lollipop-6ac9aa.netlify.app">   <img src="https://api.netlify.com/api/v1/badges/66db1868-1862-420e-8c0a-a039422bbddc/deploy-status" alt="Netlifystatus"/></a>
+   
+  </sup>
+  <br />
+  <p align="center">
+    <a href="#-intro"><b>What is this?</b></a>
+    &nbsp;&nbsp;&mdash;&nbsp;&nbsp;
+    <a href="https://iridescent-lollipop-6ac9aa.netlify.app"><b>Hosted Version</b></a>
+    &nbsp;&nbsp;&mdash;&nbsp;&nbsp;
+    <a href="#-getting-started"><b>Usage</b></a>
+    &nbsp;&nbsp;&mdash;&nbsp;&nbsp;
+    <a href="#-further-help"><b>Need help?</b></a>
+    &nbsp;&nbsp;&mdash;&nbsp;&nbsp;
+    <a href="https://github.com/luccacastro/nc-backend-api-flask"><b>My API</b></a>
+  </p>
+  <br />
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
 
-In the project directory, you can run:
+## 👋 Intro
 
-### `npm start`
+Offers an interactive user interface built in <a href="https://reactjs.org/"><b>React</b></a>. I have used component based building to manage states in order to create a relativly complex UI. I have also used <a href="https://react-icons.github.io/react-icons/"><b>React Icons</b></a> and <a href="https://react-bootstrap.github.io/"><b>React Bootstrap</b></a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Getting Started
 
-### `npm test`
+* In your terminal go into a directory and then run the following command:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+        git clone https://github.com/luccacastro/rosetta-react
+        cd rosetta-react
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Run this code in your terminal:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+        npm i
+        npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Minimum Node.js 
+* Node.js >= 17.2
+    
 
-### `npm run eject`
+## 👊 Further Help?
+This is my first public front-end project feel free to email me any questions , advices regarding this project <br />
+© Raymund Noel Gyuris <br />
+contact me via e-mail RaymundTech@protonmail.com <br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ 
+<br />
