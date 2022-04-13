@@ -51,7 +51,7 @@ Offers an interactive user interface built in <a href="https://reactjs.org/"><b>
 ## 👊 Further Help?
 This is my first public front-end project feel free to email me any questions , advices regarding this project <br />
 © Raymund Noel Gyuris <br />
-contact me via e-mail RaymundTech@protonmail.com <br/>
+contact me via e-mail luccazutin@gmail.com <br/>
 
 
  
